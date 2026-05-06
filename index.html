@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UEP Binalonan</title>
+
+<style>
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: 80px;
+}
+
+#home,
+.page {
+    flex: 1;
+}
+
+/* Header */
+header {
+    background: #cc2323;
+    color: white;
+    padding: 5px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+
+    white-space: nowrap;
+    flex: 1;
+    justify-content: flex-end;
+
+    overflow: visible; 
+}
+
+nav ul::-webkit-scrollbar {
+    display: none;
+}   
+
+nav ul li {
+    cursor: pointer;
+}
+
+
+
+/* Sections */
+.section {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 270px);
+    gap: 20px;
+    justify-content: center;
+    align-items: start;
+}
+
+.cards a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.card {
+    width: 270px;
+    height: 160px;
+    background-color: rgba(77, 75, 75, 0.075); 
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.section {
+    overflow: hidden;
+}
+
+
+.section a {
+    color: black;
+    text-decoration: none;
+
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 10px 20px rgba(240, 73, 73, 0.356);
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+    background: #cc2323;
+    color: white;
+    text-align: center;
+    padding: 5px;
+}
+
+nav ul li {
+    position: relative;
+    padding: 5px 10px;
+}
+
+/* Dropdown hidden by default */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: #cc2323;    
+    color: black;
+    top: 100%;
+    left: 0;
+    min-width: 150px;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid black;
+     z-index: 2000;
+}
+
+/* Dropdown items */
+.dropdown-content li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-content li:hover {
+    background: white;
+    color: white;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;   /* prevents squishing */
+}
+
+/* Logo placeholder */
+.logo {
+    width: 40px;
+    height: 40px;
+    background: maroon; /* placeholder color */
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+/* When you add image later */
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#home {
+    display: block;
+}
+/* hide all pages by default */
+.page {
+    display: none;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* show when clicked */
+.page:target {
+    display: block;
+}
+
+/* hide home when any page is active */
+.page:target ~ #home {
+    display: none;
+}
+
+/* make links clean */
+nav ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+.hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.bg-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.6;
+    filter: grayscale(40%) brightness(80%);
+}
+
+/* dark overlay so text is readable */
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+      background: rgba(0,0,0,0.3);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 60px;
+}
+
+.hero p {
+    font-size: 22px;
+}
+
+.logo-container h2 a {
+    color: white;
+    text-decoration: none;
+}
+
+.page img {
+    width: 100%;
+    max-width: 500px;   /* smaller size */
+    display: block;
+    margin: 10px auto;
+    border-radius: 8px;
+    border: 2px solid #cc2323; /* matches theme */
+    padding: 4px;
+    background: white;
+     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.zoomable {
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+}
+
+.zoomed {
+    transform: scale(2);
+    cursor: zoom-out;
+    position: relative;
+    z-index: 2000;
+}
+
+/* NAV LINKS HOVER */
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    transition: 0.3s ease;
+    padding: 5px 8px;
+    border-radius: 5px;
+}
+
+nav ul li a:hover {
+    color: orangered;
+}
+
+/* LOGO + TITLE HOVER */
+.logo-container {
+    cursor: pointer;
+    transition: 0.3s ease;
+    padding: 5px;
+    border-radius: 8px;
+     transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.logo-container:hover {
+    color: orangered;
+    transform: scale(1.05);
+    transition: 0.5 ease-in-out;
+}
+
+.logo-container:hover h2 a {
+    color: orangered;
+    transform: scale(1.20);
+
+}
+
+nav ul li {
+    transition: transform 0.25s ease, color 0.25s ease;
+}
+
+nav ul li:hover {
+    color: orangered;
+    transform: scale(1.15);
+}
+/* LOGO + TITLE HOVER */
+.logo-container {
+    cursor: pointer;
+    transition: 0.3s ease;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.contact-box {
+    max-width: 450px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-box input,
+.contact-box select,
+.contact-box textarea {
+    padding: 12px;
+    border: 1px solid #cc2323;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+.contact-box textarea {
+    height: 140px;
+    resize: none;
+}
+
+.contact-box button {
+    background: #cc2323;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.contact-box button:hover {
+    background: orangered;
+    transform: scale(1.05);
+}
+
+/* POPUP */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    border-top: 5px solid #cc2323;
+}
+
+.popup-content button {
+    margin-top: 10px;
+    background: #cc2323;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+
+.newscard {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.newscard:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(240, 73, 73, 0.35);
+}
+
+.newscard img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.newscard:hover img {
+    transform: scale(1.03);
+}
+
+.newscard h3 {
+    margin: 10px 0;
+}
+
+.newscard p {
+    margin: 5px 0;
+}
+
+.menu-toggle {
+    font-size: 26px;
+    cursor: pointer;
+    display: none;
+    color: white;
+}
+
+
+.contact-container {
+    display: flex;
+    gap: 30px;
+    max-width: 900px;
+    margin: auto;
+    align-items: flex-start;
+}
+
+/* LEFT SIDE (info) */
+.contact-info {
+    flex: 1;
+    text-align: left;
+    padding: 20px;
+    border: 1px solid rgba(204, 35, 35, 0.3); /* low opacity border */
+    border-radius: 10px;
+}
+
+/* RIGHT SIDE (form) */
+.contact-form {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid rgba(204, 35, 35, 0.3); /* low opacity border */
+    border-radius: 10px;
+}
+
+
+@media (max-width: 768px) {
+
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #cc2323;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 10px 0;
+    }
+
+    nav ul.show {
+        display: flex;
+    }
+
+    nav ul li {
+        width: 100%;
+        padding: 10px;
+    }
+
+    /* dropdown fix */
+    .dropdown-content {
+        position: static;
+        display: none;
+        background: #b81e1e;
+        border: none;
+    }
+
+    .dropdown.active .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content li {
+        padding-left: 20px;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    /* ===== CARDS ===== */
+    .cards {
+        grid-template-columns: 1fr; /* 1 per row */
+        padding: 0 15px;
+    }
+
+    .card {
+        width: 100%;
+        height: auto;
+    }
+
+    /* ===== CONTACT SECTION ===== */
+    .contact-container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 0 15px;
+    }
+
+    .contact-info,
+    .contact-form {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .contact-box input,
+    .contact-box select,
+    .contact-box textarea {
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    /* ===== ENROLL FORM ===== */
+    .form-grid {
+        grid-template-columns: 1fr; /* stack everything */
+    }
+
+    .form-grid textarea,
+    .form-grid button {
+        grid-column: span 1;
+    }
+
+    .enroll-box {
+        padding: 0 15px;
+    }
+
+    /* ===== GENERAL TEXT FIX ===== */
+    h1 {
+        font-size: 26px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}
+</style>
+
+
+
+<style>
+.enroll-box {
+    max-width: 700px;
+    margin: auto;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.form-grid input,
+.form-grid select,
+.form-grid textarea {
+    padding: 10px;
+    border: 1px solid #cc2323;
+    border-radius: 6px;
+    outline: none;
+    font-size: 14px;
+}
+
+.form-grid textarea {
+    grid-column: span 2;
+    height: 100px;
+    resize: none;
+}
+
+.form-grid button {
+    grid-column: span 2;
+    padding: 12px;
+    background: #cc2323;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-grid button:hover {
+    background: orangered;
+    transform: scale(1.03);
+}
+</style>
+
+<style>
+
+nav ul li a[href="#enroll"] {
+    background: white;
+    color: #cc2323;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 13px;
+    transition: 0.3s ease;
+}
+
+nav ul li a[href="#enroll"]:hover {
+    background: orangered;
+    color: white;
+    transform: scale(1.05);
+}
+
+
+</style>
+
+<script>
+function toggleMenu() {
+    document.querySelector("nav ul").classList.toggle("show");
+}
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const img = document.getElementById("adminImg");
+
+    if (img) {
+        img.addEventListener("click", () => {
+            img.classList.toggle("zoomed");
+        });
+    }
+});
+</script>
+
+<script>
+document.querySelectorAll('.dropdown').forEach(item => {
+    item.addEventListener('click', () => {
+        item.classList.toggle('active');
+    });
+});
+</script>
+
+</head>
+
+<body>
+
+<header>
+<nav>
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+        <div class="logo-container">
+    <div class="logo"><img src="logo.png" alt=""></div>
+    <h2><a href="#home">University of Eastern Pangasinan</a></h2>
+        </div>
+
+
+        <ul>
+         <li><a href="#home">Home</a></li>
+
+        <li class="dropdown">
+            About
+            <ul class="dropdown-content">
+                <li><a href="#History">History</a></li>
+                <li><a href="#Mission&Vision">Mission & Vision</a></li>
+                <li><a href="#Administration">Administration</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown">
+            Courses
+            <ul class="dropdown-content">
+                <li><a href="#course-it">Information technology</a></li>
+                <li><a href="#course-ba">Business Administration</a> </li>
+                <li><a href="#course-educ">Education</a></li>
+                <li><a href="#course-hm">Hospitality Management</a> </li>
+                <li><a href="#course-crim">Criminology</a></li>
+                <li><a href="#course-mid">Midwifery</a></li>
+                <li><a href="#course-acc">Accounting</a></li>
+            </ul>
+        </li>
+
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+        <li><a href="#enroll">ENROLL NOW</a></li>
+        
+    </ul>
+    </nav>
+</header>
+
+
+<section id="course-it" class="page">
+    
+    <img src="bsit.jpg" alt="">
+    <h2>Information Technology</h2>
+    <p>Information Technology focuses on the study and application of computer systems,
+         software development, data management, and network administration. 
+         Students learn how to design, develop, and maintain digital systems that support modern businesses and organizations. 
+         The course also covers programming, cybersecurity, web development, and database management, 
+         preparing students for careers in the fast-growing technology industry where problem-solving 
+         and innovation are essential.</p>
+</section>
+
+<section id="course-ba" class="page">
+
+    <img src="business.jpg" alt="">
+        <h2>Business Administration</h2>
+    <p>Business Administration focuses on the principles and practices of managing organizations effectively. 
+        Students gain knowledge in marketing, finance, human resources, operations management, and entrepreneurship.
+         The course develops leadership, decision-making, and strategic planning skills needed in the business world.
+         It prepares graduates for careers in corporate management, business ownership, banking,
+          and various administrative and supervisory roles in different industries.</p>
+</section>
+
+<section id="course-educ" class="page">
+    <img src="educ.jpg" alt="">
+    <h2>Education </h2>
+    <p>Education prepares future teachers with the knowledge and skills needed to effectively teach 
+        and guide learners in different educational levels. The course covers child development,
+         teaching strategies, curriculum design, classroom management, and educational psychology. 
+         Students are trained to become effective communicators and mentors who can inspire and support students'
+         academic and personal growth in a structured learning environment.</p>
+</section>
+
+<section id="course-hm" class="page">
+   
+    <img src="hospitality.jpg" alt="">
+     <h2>Hospitality Management</h2>
+    <p>Hospitality Management prepares students for careers in the tourism and service industry, including hotels, 
+        resorts, restaurants, and event planning. The course emphasizes customer service, business operations, 
+        food and beverage management, and hospitality marketing. Students are trained to handle real-world 
+        hospitality situations with professionalism, efficiency, and strong interpersonal skills,
+         ensuring guests receive high-quality service experiences in both local and international settings.</p>
+</section>
+
+
+<section id="course-crim" class="page">
+    <img src="crimi.jpg" alt="">
+    <h2>Criminology </h2>
+    <p>Criminology is the scientific study of crime, criminal behavior, law enforcement, and 
+        the justice system. This course equips students with knowledge in forensic science, 
+        criminal investigation, sociology, and psychology related to crime. It also develops 
+        skills in analyzing criminal patterns and understanding the causes of criminal activity. 
+        Graduates are prepared for careers in law enforcement agencies, security services, forensic 
+        departments, and public safety organizations.</p>
+</section>
+
+<section id="course-mid" class="page">
+    <img src="midwife.jpg" alt="">
+    <h2>Midwifery </h2>
+    
+    <p>Midwifery is a healthcare course dedicated to maternal and newborn care during pregnancy, 
+        childbirth, and the postnatal period. Students are trained in safe delivery practices,
+         prenatal care, newborn assessment, and emergency response during childbirth. The program 
+         emphasizes compassion, professionalism, and medical knowledge to ensure the safety and well-being 
+         of both mother and child. Graduates typically work in hospitals, clinics, and community health centers.</p>
+</section>
+
+<section id="course-acc" class="page">
+    <img src="account.jpg" alt="">
+    <h2>Accounting</h2>
+    <p>Accounting focuses on the recording, analysis, and reporting of financial transactions for
+         individuals and organizations. Students learn about bookkeeping, auditing, taxation, financial
+          reporting, and cost management. The course develops strong analytical and mathematical skills 
+          needed to interpret financial data accurately. Graduates are prepared for careers in accounting firms, 
+          corporate finance departments, government agencies, and auditing institutions.</p>
+</section>
+
+
+<section id="Mission&Vision" class="page">
+    <h2>Mission</h2>
+    <img src="mision.jpg" alt="">
+    <h2>Vision</h2>
+    <img src="vision.jpg" alt="">
+</section>
+
+
+
+<section id="History" class="page">
+   <img src="uep.jpg" alt="">
+   
+    <h2>History</h2>
+    
+    <p>The University of Eastern Pangasinan (UEP) Binalonan Campus was established with 
+        the vision of bringing accessible, affordable, and quality education to students 
+        in Binalonan and nearby towns in Pangasinan. It was created to support the growing 
+        demand for higher education in the region and to help develop skilled professionals 
+        who can contribute to local and national development.
+
+    Since its establishment, UEP Binalonan has continued to expand its academic programs, 
+    facilities, and student services. The institution focuses on providing practical and 
+    industry-relevant education in fields such as Information Technology, Business Administration, 
+    Education, Criminology, Hospitality Management, Midwifery, and Accounting.
+
+Through the years, the university has remained committed to its mission of shaping competent, 
+responsible, and service-oriented graduates. It continues to strengthen its role as a learning 
+institution dedicated to academic excellence, character formation, and community development in Pangasinan.</p>
+</section>
+
+
+
+
+<section id="Administration" class="page">
+       <img id="adminImg" class="zoomable" src="org-low.jpg" alt="Administration">
+<h2>Administration</h2>
+   <p>The administration of UEP Binalonan is composed of dedicated academic 
+    and administrative leaders who oversee the overall operations of the university. 
+    They are responsible for maintaining academic quality, managing school programs, 
+    and ensuring a supportive learning environment for students and faculty.</p>
+</section>
+
+
+<section id="news" class="page"> 
+    <h2>Latest News & Announcements</h2> 
+    <div class="newscard">
+         <img src="new1.jpg" alt="News Image" class="news-zoomable"> 
+         <h3>UEP earns Reporter Status at THE Asia University Rankings 2026</h3>
+          <p> University of Eastern Pangasinan (UEP) obtained a “Reporter Status” at 
+            the Times Higher Education (THE) Asia University Rankings 2026. This status 
+            reflects the university's continuous commitment to internationalization by 
+            participating in global university benchmarking activities. </p> 
+
+            <p> Reporter status means that UEP has submitted institutional data
+                 to THE and is now part of its global benchmarking process; however, 
+                 it is not yet included in the ranked list until it meets the eligibility 
+                 criteria. </p> 
+
+
+            <p> This achievement serves as a foundation for UEP's future inclusion
+                in international rankings, reflecting its pursuit of global excellence
+                through quality education and service. 
+            </p> 
+        </div>
+
+    <div class="newscard"> 
+        <img src="new2.jpg" alt="News Image" class="news-zoomable"> 
+        <h3>Submission of Admission</h3>
+         <p>Deadline of submission of admission requirements is on April 30, 2026,
+             at 5:00 PM.</p> <p>All applicants are encouraged to submit on or before 
+                the deadline.</p> 
+            </div> 
+        </section>
+
+<section id="contact" class="page">
+
+<h2>Contact Us</h2>
+
+<div class="contact-container">
+
+    <!-- LEFT SIDE (INFO) -->
+    <div class="contact-info">
+        <h3>Get in Touch</h3>
+        <p><b>Address:</b> UEP Binalonan Campus, Pangasinan, Philippines</p>
+        <p><b>Phone:</b> 0912-345-6789</p>
+        <p><b>Email:</b> uepbinalonan@email.com</p>
+        <p><b>Office Hours:</b> Mon - Fri, 8:00 AM - 5:00 PM</p>
+
+        <br>
+
+        <p><b>Follow Us:</b></p>
+        <p><i class="fa-brands fa-facebook"></i> Facebook Page</p>
+        <p><i class="fa-brands fa-instagram"></i> @uep_binalonan</p>
+    </div>
+
+    <!-- RIGHT SIDE (FORM) -->
+     <div class="contact-form">
+    <form class="contact-box" onsubmit="submitContact(event)">
+
+        <input id="c_name" type="text" placeholder="Full Name" required>
+        <input id="c_email" type="email" placeholder="Email Address" required>
+        <input id="c_phone" type="text" placeholder="Contact Number (11 digits)" required>
+
+        <select id="c_subject" required>
+            <option value="">Select Subject</option>
+            <option>Inquiry</option>
+            <option>Admission</option>
+            <option>Complaint</option>
+            <option>Other</option>
+        </select>
+
+        <textarea id="c_message" placeholder="Your Message" required></textarea>
+
+        <button type="submit">Send Message</button>
+
+    </form>
+</div>
+</div>
+
+</section>
+
+
+
+
+
+<section id="enroll" class="page">
+<h2>Enrollment Form</h2>
+
+<form class="enroll-box" onsubmit="submitEnroll(event)">
+<div class="form-grid">
+
+<input id="fname" placeholder="First Name">
+<input id="mname" placeholder="Middle Name">
+<input id="lname" placeholder="Last Name">
+<input id="eage" type="number" placeholder="Age">
+
+<input id="bday" type="date">
+<input id="email" type="email" placeholder="Email">
+<input id="contact" placeholder="Contact Number">
+
+<select id="course">
+    <option>Information Technology</option>
+    <option>Business Administration</option>
+    <option>Education</option>
+</select>
+
+<select id="gender">
+    <option>Male</option>
+    <option>Female</option>
+</select>
+
+<select id="year">
+    <option>1st Year</option>
+    <option>2nd Year</option>
+    <option>3rd Year</option>
+    <option>4th Year</option>
+</select>
+
+<textarea id="address" placeholder="Address"></textarea>
+
+<button type="submit">Submit</button>
+
+</div>
+</form>
+</section>
+
+
+
+
+<div id="popup" class="popup">
+    <div class="popup-content">
+
+        <h3 style="color:#cc2323;">You have been admitted</h3>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:left;font-size:14px;">
+
+            <div><b>Name:</b> <span id="pname"></span></div>
+            <div><b>Age:</b> <span id="page"></span></div>
+
+            <div><b>Birthday:</b> <span id="pbday"></span></div>
+            <div><b>Email:</b> <span id="pemail"></span></div>
+
+            <div><b>Contact:</b> <span id="pcontact"></span></div>
+            <div><b>Course:</b> <span id="pcourse"></span></div>
+
+            <div><b>Gender:</b> <span id="pgender"></span></div>
+            <div><b>Year:</b> <span id="pyear"></span></div>
+
+            <div style="grid-column:span 2;">
+                <b>Address:</b> <span id="paddress"></span>
+            </div>
+
+        </div>
+
+        <button onclick="closePopup()">Close</button>
+
+    </div>
+</div>
+<div class="popup" id="contactPopup">
+    <div class="popup-content">
+        <h3 style="color:#cc2323;">Message Sent!</h3>
+        <p>Thank you for contacting us.</p>
+        <button onclick="closeContactPopup()">Close</button>
+    </div>
+</div>
+
+
+    <div id="home">
+
+<section class="hero">
+    <video autoplay muted loop playsinline class="bg-video">
+        <source src="PAANO NGA BA MAG ENROLL SA UNIVERSITY OF PANGASINAN.mp4" type="video/mp4">
+    </video>
+
+    <div class="hero-content">
+        <h1>Welcome to UEP Binalonan</h1>
+        <p>Your future starts here</p>
+    </div>
+</section>
+
+
+<section class="section">
+    <h2>Our Courses</h2>
+    <a href="#course-it"><div class="cards">
+        <div class="card">
+            <h3>IT</h3>
+            <p>Learn technology skills.</p>
+        </div>
+    </a>
+    
+    <a href="#course-ba">
+        <div class="card">
+            <h3>Business Administration</h3>
+            <p>Build your career.</p>
+        </div>
+    </a>
+        
+    <a href="#course-educ">
+        <div class="card">
+            <h3>Education</h3>
+            <p>Shape future minds.</p>
+        </div>
+    </a>
+        
+  <a href="#course-hm">
+        <div class="card">
+            <h3>Hospitality Management</h3>
+            <p>Hotel, restaurant, tourism service.</p>
+        </div>
+    </a>
+
+     <a href="#course-mid">
+        <div class="card">
+            <h3>Midwifery </h3>
+            <p>Maternal and newborn care.</p>
+        </div>
+    </a>
+     
+     <a href="#course-crim">
+        <div class="card">
+            <h3>Criminology</h3>
+            <p>Crime and justice study.</p>
+        </div>
+    </a>
+     
+     <a href="#course-hm">
+        <div class="card">
+            <h3>Accounting</h3>
+            <p>Financial record keeping.</p>
+        </div>
+    </a>
+    
+
+    </div>
+
+
+<section class="section">
+    <h2>About Us</h2>
+    <p>UEP Binalonan is committed to providing quality education.</p>
+       
+    <p>
+         <i class="fa-brands fa-facebook" style="color:#1877F2; font-size:20px;"></i>
+        Visit our Facebook Page
+    </p> 
+
+  <p><a href="#contact">Contact us</a></p>
+</section>
+
+
+
+
+
+
+
+
+<script>
+function submitContact(e){
+    e.preventDefault();
+
+    const name = document.getElementById("c_name").value.trim();
+    const email = document.getElementById("c_email").value.trim();
+    const phone = document.getElementById("c_phone").value.trim();
+    const subject = document.getElementById("c_subject").value;
+    const message = document.getElementById("c_message").value.trim();
+
+    if(!name || !email || !phone || !subject || !message){
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    if(!/^\d{11}$/.test(phone)){
+        alert("Contact number must be 11 digits.");
+        return;
+    }
+
+    // SHOW POPUP
+    document.getElementById("contactPopup").style.display = "flex";
+
+    document.querySelector(".contact-box").reset();
+    
+
+}
+function closeContactPopup(){
+    document.getElementById("contactPopup").style.display = "none";
+}
+</script>
+
+<script>
+window.addEventListener("hashchange", () => {
+    window.scrollTo(0, 0);
+});
+</script>
+
+
+<script>
+function submitEnroll(e){
+    e.preventDefault();
+
+    document.getElementById("pname").innerText =
+        document.getElementById("fname").value + " " +
+        document.getElementById("mname").value + " " +
+        document.getElementById("lname").value;
+
+    document.getElementById("page").innerText = document.getElementById("eage").value;
+    document.getElementById("pbday").innerText = document.getElementById("bday").value;
+    document.getElementById("pemail").innerText = document.getElementById("email").value;
+    document.getElementById("pcontact").innerText = document.getElementById("contact").value;
+    document.getElementById("pcourse").innerText = document.getElementById("course").value;
+    document.getElementById("pgender").innerText = document.getElementById("gender").value;
+    document.getElementById("pyear").innerText = document.getElementById("year").value;
+    document.getElementById("paddress").innerText = document.getElementById("address").value;
+
+    document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup(){
+    document.getElementById("popup").style.display = "none";
+}
+</script>
+
+</section>
+
+</div> 
+
+
+
+<footer>
+    <p>&copy; 2026 UEP Binalonan</p>
+</footer>
+
+
+</body>
+</html>
